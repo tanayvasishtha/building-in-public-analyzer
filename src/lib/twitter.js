@@ -15,8 +15,8 @@ export async function createTwitterClient() {
     
     // Create the client with your credentials
     const client = new TwitterApi({
-      clientId: process.env.CLIENT_ID,
-      clientSecret: process.env.CLIENT_SECRET,
+      appKey: process.env.CLIENT_ID,
+      appSecret: process.env.CLIENT_SECRET,
     });
     
     // Get app-only client for read-only operations with explicit error handling
