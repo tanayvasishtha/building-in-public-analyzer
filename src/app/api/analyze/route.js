@@ -24,7 +24,7 @@ export async function POST(request) {
     // Create Twitter client with OAuth 2.0
     const client = await createTwitterClient();
     
-    // Fetch user profile
+    // Fetch user profile using the imported function
     const profile = await fetchUserProfile(client, username);
     console.log(`Fetched profile for ${username} (ID: ${profile.id})`);
     
