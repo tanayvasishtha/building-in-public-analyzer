@@ -1,20 +1,36 @@
 import { TwitterApi } from 'twitter-api-v2';
 
-// Create Twitter API client with OAuth 2.0
+// Create Twitter API client with improved error handling
 export async function createTwitterClient() {
   try {
+    // Debug logging to help troubleshoot
+    console.log("Initializing Twitter client with OAuth 2.0");
+    console.log("Client ID available:", !!process.env.CLIENT_ID);
+    console.log("Client Secret available:", !!process.env.CLIENT_SECRET);
+    
+    // Validate credentials exist
+    if (!process.env.CLIENT_ID || !process.env.CLIENT_SECRET) {
+      throw new Error("Twitter API credentials are missing");
+    }
+    
     // Create the client with your credentials
     const client = new TwitterApi({
       clientId: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
     });
     
-    // Get an app-only client for read-only operations
-    const appOnlyClient = await client.appLogin();
-    return appOnlyClient;
+    // Get app-only client for read-only operations with explicit error handling
+    try {
+      const appOnlyClient = await client.appLogin();
+      console.log("Successfully authenticated with Twitter API");
+      return appOnlyClient;
+    } catch (authError) {
+      console.error("Authentication error:", authError);
+      throw new Error(`Twitter API authentication failed: ${authError.message}`);
+    }
   } catch (error) {
-    console.error('Error creating Twitter client:', error);
-    throw new Error('Failed to initialize Twitter API client');
+    console.error('Error in createTwitterClient:', error.message);
+    throw new Error(`Failed to initialize Twitter API client: ${error.message}`);
   }
 }
 
@@ -236,3 +252,4 @@ export function generateRecommendations(scores) {
   
   return recommendations.slice(0, 5); // Return top 5 recommendations
 }
+
