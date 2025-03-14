@@ -1,4 +1,5 @@
 import './globals.css';
+import Link from 'next/link';
 
 export const metadata = {
   title: 'Building in Public Analyzer',
@@ -11,9 +12,9 @@ export default function RootLayout({ children }) {
       <body className="bg-gray-50">
         <header className="bg-white shadow-sm py-4">
           <div className="container mx-auto px-4 flex justify-between items-center">
-            <a href="/" className="text-xl font-bold text-blue-600">
+            <Link href="/" className="text-xl font-bold text-blue-600">
               Building in Public Analyzer
-            </a>
+            </Link>
           </div>
         </header>
         

@@ -57,7 +57,7 @@ async function getAnalysisData(username) {
       recommendations: [
         "Share your building journey at least once a week",
         "Include visuals in your building updates",
-        "Talk about challenges you've overcome",
+        "Talk about challenges you&apos;ve overcome",
         "Ask for feedback on specific aspects",
         "Engage with other builders regularly"
       ]
@@ -76,14 +76,14 @@ export default async function AnalysisPage({ params }) {
     name: 'Builder', 
     description: 'Building in public' 
   };
-  const scores = analysis?.scores || {};
+  // Removed the unused scores variable
   const recommendations = data?.recommendations || [];
   
   return (
     <div className="min-h-screen flex flex-col items-center py-12 px-4 bg-gradient-to-b from-white to-blue-50">
       <div className="max-w-4xl w-full">
         <h1 className="text-3xl font-bold text-center mb-3 text-gray-800">
-          @{username}'s Building in Public Analysis
+          @{username}&apos;s Building in Public Analysis
         </h1>
         <p className="text-center text-gray-600 mb-8">
           Analyzed on {new Date().toLocaleDateString('en-US', {
