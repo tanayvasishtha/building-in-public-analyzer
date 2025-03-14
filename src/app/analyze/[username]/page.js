@@ -38,7 +38,7 @@ export default async function AnalysisPage({ params }) {
       <div className="min-h-screen flex flex-col items-center justify-center p-8">
         <div className="bg-red-100 text-red-700 p-6 rounded-lg max-w-md text-center shadow-lg">
           <h2 className="text-xl font-bold mb-2">Error</h2>
-          <p>We couldn't analyze the profile for @{username}. Please try again later.</p>
+          <p>We couldn&apos;t analyze the profile for @{username}. Please try again later.</p>
         </div>
       </div>
     );
