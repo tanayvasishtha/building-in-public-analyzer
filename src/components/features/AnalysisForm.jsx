@@ -139,7 +139,7 @@ export default function AnalysisForm({ includeHeader = true }) {
         transition={{ duration: 0.6, delay: 0.4 }}
         className="w-full max-w-3xl"
       >
-        <h2 className="text-2xl font-bold text-center mb-8 bg-gradient-to-r from-blue-700 to-indigo-700 bg-clip-text text-transparent">How It Works</h2>
+        <h2 className="text-2xl font-bold text-center mb-8 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">How It Works</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div className="bg-white p-6 rounded-xl shadow-md transition-all duration-300 hover:shadow-xl hover:transform hover:scale-105 border border-gray-100">
