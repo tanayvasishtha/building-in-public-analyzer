@@ -2,7 +2,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import ResultsCard from '@/components/features/ResultsCard';
-import Recommendations from '@/components/features/Recommendations';
 import ShareButton from '@/components/features/ShareButton';
 
 export default function AnalysisPage() {
