@@ -42,7 +42,7 @@ export default function AnalysisForm({ includeHeader = true }) {
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="w-full max-w-2xl mx-auto text-center mb-10"
+          className="w-full max-w-2xl mx-auto text-center mb-4"
         >
           <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
             Building in Public Analyzer
