@@ -68,37 +68,23 @@ export default function AnalysisPage() {
   const recommendations = data?.recommendations || [];
   
   return (
-    <div className="min-h-screen flex flex-col items-center py-3 px-3 bg-gradient-to-b from-white to-blue-50">
+    <div className="min-h-screen flex flex-col items-center py-6 px-4 bg-gradient-to-b from-white to-blue-50">
       <div className="w-full max-w-3xl">
-        <div className="flex justify-between items-center mb-2">
-          <h1 className="text-xl md:text-2xl font-bold text-gray-800">
+        <div className="flex justify-between items-center mb-4">
+          <h1 className="text-2xl md:text-3xl font-bold text-gray-800">
             @{username}&apos;s Analysis
           </h1>
           <ShareButton username={username} />
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
           <div className="md:col-span-1">
-            <div className="w-full bg-gradient-to-br from-blue-400 to-blue-600 border-2 border-blue-500 rounded-lg p-3 flex flex-col items-center justify-center text-center shadow-lg">
-              <div className="text-white font-bold text-base mb-0.5">Building in Public</div>
-              <div className="text-xl font-bold mb-1 text-white">{categoryInfo.name}</div>
-              <div className="text-5xl font-bold mb-0.5 text-white">{Math.min(100, Math.round(analysis.overallScore || 0))}</div>
-              <div className="text-xs mb-1 text-white opacity-90">Builder Score</div>
-              <p className="text-xs text-white opacity-90">{categoryInfo.description}</p>
-            </div>
-            
-            <div className="mt-3 p-3 bg-white rounded-lg shadow">
-              <h3 className="font-semibold text-gray-800 mb-2">Build Recommendations</h3>
-              <ul className="space-y-1.5">
-                {recommendations.slice(0, 3).map((rec, index) => (
-                  <li key={index} className="text-xs text-gray-700 flex">
-                    <svg className="w-4 h-4 mr-1 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                      <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path>
-                    </svg>
-                    {rec}
-                  </li>
-                ))}
-              </ul>
+            <div className="w-full bg-gradient-to-br from-blue-400 to-blue-600 border-2 border-blue-500 rounded-lg p-4 flex flex-col items-center justify-center text-center shadow-lg">
+              <div className="text-white font-bold text-lg mb-1">Building in Public</div>
+              <div className="text-2xl font-bold mb-2 text-white">{categoryInfo.name}</div>
+              <div className="text-6xl font-bold mb-2 text-white">{Math.min(100, Math.round(analysis.overallScore || 0))}</div>
+              <div className="text-sm mb-2 text-white opacity-90">Builder Score</div>
+              <p className="text-sm text-white opacity-90">{categoryInfo.description}</p>
             </div>
           </div>
           
@@ -107,8 +93,25 @@ export default function AnalysisPage() {
           </div>
         </div>
         
-        <div className="text-center mt-3">
-          <p className="text-xs text-gray-600">
+        <div className="bg-white rounded-lg shadow-lg p-6 mb-6">
+          <h3 className="font-bold text-xl text-gray-800 mb-4">Build Recommendations</h3>
+          <ul className="space-y-3">
+            {recommendations.map((rec, index) => (
+              <li 
+                key={index} 
+                className="text-gray-700 flex items-start p-3 border border-gray-100 rounded-lg transition-all duration-300 hover:shadow-md hover:transform hover:scale-102 hover:border-blue-200 cursor-pointer"
+              >
+                <div className="bg-blue-100 text-blue-600 rounded-full w-6 h-6 flex items-center justify-center mr-3 flex-shrink-0">
+                  <span className="text-xs font-semibold">{index + 1}</span>
+                </div>
+                {rec}
+              </li>
+            ))}
+          </ul>
+        </div>
+        
+        <div className="text-center">
+          <p className="text-sm text-gray-600">
             If you found this useful, please 
             <a href="https://github.com/tanayvasishtha/building-in-public-analyzer" 
                target="_blank" rel="noopener noreferrer" 
