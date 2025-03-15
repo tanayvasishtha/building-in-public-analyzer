@@ -113,6 +113,7 @@ export default function AnalysisForm() {
         </button>
       </form>
       
+      {/* The How It Works section at the bottom is kept */}
       <div className="w-full max-w-3xl">
         <h2 className="text-2xl font-bold text-center mb-8">How It Works</h2>
         
