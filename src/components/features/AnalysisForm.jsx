@@ -2,7 +2,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
-export default function AnalysisForm() {
+export default function AnalysisForm({ includeHeader = true }) {
   const [username, setUsername] = useState('');
   const [twitterPosts, setTwitterPosts] = useState('');
   const [githubContributions, setGithubContributions] = useState('');
@@ -35,15 +35,19 @@ export default function AnalysisForm() {
   };
   
   return (
-    <div className="flex flex-col items-center py-8 px-4">
-      <div className="w-full max-w-2xl mx-auto text-center mb-8">
-        <h1 className="text-3xl font-bold text-blue-600 mb-3">Building in Public Analyzer</h1>
-        <p className="text-gray-600">Discover your Building in Public style and get personalized recommendations to boost your online presence.</p>
-      </div>
+    <div className="flex flex-col items-center py-4 px-4">
+      {/* Only show this header if includeHeader is true */}
+      {includeHeader && (
+        <div className="w-full max-w-2xl mx-auto text-center mb-8">
+          <h1 className="text-3xl font-bold text-blue-600 mb-3">Building in Public Analyzer</h1>
+          <p className="text-gray-600">Discover your Building in Public style and get personalized recommendations to boost your online presence.</p>
+        </div>
+      )}
       
       <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto bg-white rounded-lg shadow-md p-6 mb-10">
         <h2 className="text-xl font-semibold mb-6 text-center text-gray-800">Building in Public Score Calculator</h2>
         
+        {/* Form fields remain the same */}
         <div className="mb-8">
           <label className="block text-sm font-medium mb-2 text-gray-700">
             X (Twitter) Username
@@ -113,6 +117,7 @@ export default function AnalysisForm() {
         </button>
       </form>
       
+      {/* How It Works section */}
       <div className="w-full max-w-3xl">
         <h2 className="text-2xl font-bold text-center mb-8">How It Works</h2>
         
@@ -148,6 +153,7 @@ export default function AnalysisForm() {
     </div>
   );
 }
+
 
 
 

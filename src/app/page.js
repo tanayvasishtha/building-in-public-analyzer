@@ -12,11 +12,8 @@ export default function HomePage() {
           </p>
         </div>
         
-        {/* This renders the form and the HOW IT WORKS section */}
-        <AnalysisForm />
-        
-        {/* Remove this entire section that was highlighted in yellow */}
-        {/* No duplicate How It Works section here */}
+        {/* Only render the form component without its own heading */}
+        <AnalysisForm includeHeader={false} />
       </div>
     </main>
   );
