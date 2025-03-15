@@ -37,83 +37,95 @@ export default function AnalysisForm() {
   };
   
   return (
-    <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto bg-white rounded-lg shadow-md p-6">
-      <h2 className="text-xl font-semibold mb-4 text-gray-800">Building in Public Score Calculator</h2>
-      
-      <div className="mb-6">
-        <label className="block text-sm font-medium mb-2 text-gray-700">
-          X (Twitter) Username
-        </label>
-        <input
-          type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Enter username without @"
-          required
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-      </div>
-      
-      <div className="mb-6">
-        <label className="block text-sm font-medium mb-2 text-gray-700">
-          Total X (Twitter) Posts
-        </label>
-        <input
-          type="number"
-          value={twitterPosts}
-          onChange={(e) => setTwitterPosts(e.target.value)}
-          placeholder="Number of tweets from your profile"
-          required
-          min="0"
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-        <p className="text-xs text-gray-500 mt-1">
-          Find this on your X profile page
-        </p>
-      </div>
-      
-      <div className="mb-6">
-        <label className="block text-sm font-medium mb-2 text-gray-700">
-          Total GitHub Contributions
-        </label>
-        <input
-          type="number"
-          value={githubContributions}
-          onChange={(e) => setGithubContributions(e.target.value)}
-          placeholder="Contributions from your GitHub profile"
-          required
-          min="0"
-          className="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-        />
-        <p className="text-xs text-gray-500 mt-1">
-          Find this on your GitHub profile contributions graph
-        </p>
-      </div>
-      
-      {error && (
-        <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-md">
-          {error}
+    <div className="flex flex-col items-center py-8 px-4">
+      <form onSubmit={handleSubmit} className="w-full max-w-lg mx-auto bg-white rounded-lg shadow-md p-6">
+        <h2 className="text-2xl font-semibold mb-6 text-gray-800 text-center">Building in Public Score Calculator</h2>
+        
+        <div className="mb-6">
+          <label className="block text-sm font-medium mb-2 text-gray-700">
+            X (Twitter) Username
+          </label>
+          <input
+            type="text"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Enter username without @"
+            required
+            className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-base"
+          />
         </div>
-      )}
-      
-      <button 
-        type="submit" 
-        className="w-full px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-        disabled={isLoading}
-      >
-        {isLoading ? (
-          <div className="flex justify-center items-center">
-            <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white"></div>
+        
+        <div className="mb-6">
+          <label className="block text-sm font-medium mb-2 text-gray-700">
+            Total X (Twitter) Posts
+          </label>
+          <input
+            type="number"
+            value={twitterPosts}
+            onChange={(e) => setTwitterPosts(e.target.value)}
+            placeholder="Number of tweets from your profile"
+            required
+            min="0"
+            className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-base"
+          />
+          <p className="text-xs text-gray-500 mt-1">
+            Find this on your X profile page
+          </p>
+        </div>
+        
+        <div className="mb-6">
+          <label className="block text-sm font-medium mb-2 text-gray-700">
+            Total GitHub Contributions
+          </label>
+          <input
+            type="number"
+            value={githubContributions}
+            onChange={(e) => setGithubContributions(e.target.value)}
+            placeholder="Contributions from your GitHub profile"
+            required
+            min="0"
+            className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-base"
+          />
+          <p className="text-xs text-gray-500 mt-1">
+            Find this on your GitHub profile contributions graph
+          </p>
+        </div>
+        
+        {error && (
+          <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-md">
+            {error}
           </div>
-        ) : 'Analyze Building in Public Score'}
-      </button>
+        )}
+        
+        <button 
+          type="submit" 
+          className="w-full px-4 py-3 bg-blue-600 text-white text-lg font-medium rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <div className="flex justify-center items-center">
+              <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-white"></div>
+            </div>
+          ) : 'Analyze Building in Public Score'}
+        </button>
+        
+        <p className="mt-6 text-sm text-gray-500 text-center">
+          We&apos;ll analyze your building in public habits across platforms.
+        </p>
+      </form>
       
-      <p className="mt-4 text-sm text-gray-500 text-center">
-        We&apos;ll analyze your building in public habits across platforms.
-      </p>
-    </form>
+      <div className="mt-6 text-center">
+        <p className="text-sm text-gray-600">
+          Created by <a href="https://x.com/TanayVasishtha" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">@TanayVasishtha</a>
+        </p>
+        <p className="text-sm text-gray-600 mt-1">
+          If you find this useful, please <a href="https://github.com/tanayvasishtha/building-in-public-analyzer" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">star the GitHub repo</a>
+        </p>
+      </div>
+    </div>
   );
 }
+
 
 
 

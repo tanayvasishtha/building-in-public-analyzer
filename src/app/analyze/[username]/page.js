@@ -110,10 +110,26 @@ export default function AnalysisPage() {
         <div className="flex justify-center mb-6">
           <ShareButton username={username} />
         </div>
+        
+        {/* GitHub star request */}
+        <div className="mt-4 text-center">
+          <p className="text-sm text-gray-600">
+            If you found this analysis useful, please 
+            <a 
+              href="https://github.com/tanayvasishtha/building-in-public-analyzer" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="text-blue-600 hover:underline ml-1"
+            >
+              star our GitHub repository
+            </a>
+          </p>
+        </div>
       </div>
     </div>
   );
 }
+
 
 
 
