@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { motion } from 'framer-motion';
 
 export default function AnalysisForm({ includeHeader = true }) {
   const [username, setUsername] = useState('');
@@ -35,20 +36,35 @@ export default function AnalysisForm({ includeHeader = true }) {
   };
   
   return (
-    <div className="flex flex-col items-center py-4 px-4">
-      {/* Only show this header if includeHeader is true */}
+    <div className="flex flex-col items-center py-10 px-4">
       {includeHeader && (
-        <div className="w-full max-w-2xl mx-auto text-center mb-8">
-          <h1 className="text-3xl font-bold text-blue-600 mb-3">Building in Public Analyzer</h1>
-          <p className="text-gray-800">Discover your Building in Public style and get personalized recommendations to boost your online presence.</p>
-        </div>
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="w-full max-w-2xl mx-auto text-center mb-10"
+        >
+          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            Building in Public Analyzer
+          </h1>
+          <p className="text-gray-800 text-lg max-w-xl mx-auto">
+            Discover your Building in Public style and get personalized recommendations to boost your online presence.
+          </p>
+        </motion.div>
       )}
       
-      <form onSubmit={handleSubmit} className="w-full max-w-md mx-auto bg-white rounded-lg shadow-md p-6 mb-10">
-        <h2 className="text-xl font-semibold mb-6 text-center text-gray-800">Building in Public Score Calculator</h2>
+      <motion.form 
+        onSubmit={handleSubmit} 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.2 }}
+        className="w-full max-w-md mx-auto bg-white rounded-xl shadow-xl p-6 mb-12 border border-gray-100"
+      >
+        <h2 className="text-2xl font-semibold mb-6 text-center bg-gradient-to-r from-blue-700 to-indigo-700 bg-clip-text text-transparent">
+          Calculate Your Builder Score
+        </h2>
         
-        {/* Form fields with darker text */}
-        <div className="mb-8">
+        <div className="mb-6">
           <label className="block text-sm font-medium mb-2 text-gray-800">
             X (Twitter) Username
           </label>
@@ -58,11 +74,11 @@ export default function AnalysisForm({ includeHeader = true }) {
             onChange={(e) => setUsername(e.target.value)}
             placeholder="Enter username without @"
             required
-            className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 placeholder-gray-500"
+            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 placeholder-gray-500 transition-all duration-200 focus:bg-white"
           />
         </div>
         
-        <div className="mb-8">
+        <div className="mb-6">
           <label className="block text-sm font-medium mb-2 text-gray-800">
             Total X (Twitter) Posts
           </label>
@@ -73,14 +89,14 @@ export default function AnalysisForm({ includeHeader = true }) {
             placeholder="Number of tweets from your profile"
             required
             min="0"
-            className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 placeholder-gray-500"
+            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 placeholder-gray-500 transition-all duration-200 focus:bg-white"
           />
           <p className="text-xs text-gray-700 mt-2">
             Find this on your X profile page
           </p>
         </div>
         
-        <div className="mb-8">
+        <div className="mb-6">
           <label className="block text-sm font-medium mb-2 text-gray-800">
             Total GitHub Contributions
           </label>
@@ -91,7 +107,7 @@ export default function AnalysisForm({ includeHeader = true }) {
             placeholder="Contributions from your GitHub profile"
             required
             min="0"
-            className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 placeholder-gray-500"
+            className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 text-gray-800 placeholder-gray-500 transition-all duration-200 focus:bg-white"
           />
           <p className="text-xs text-gray-700 mt-2">
             Find this on your GitHub profile contributions graph
@@ -99,14 +115,14 @@ export default function AnalysisForm({ includeHeader = true }) {
         </div>
         
         {error && (
-          <div className="mb-6 p-3 bg-red-100 text-red-700 rounded-md">
+          <div className="mb-6 p-3 bg-red-100 text-red-700 rounded-lg">
             {error}
           </div>
         )}
         
         <button 
           type="submit" 
-          className="w-full px-4 py-3 bg-blue-600 text-white text-lg font-medium rounded-md hover:bg-blue-700 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full px-4 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white text-lg font-medium rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
           disabled={isLoading}
         >
           {isLoading ? (
@@ -115,34 +131,38 @@ export default function AnalysisForm({ includeHeader = true }) {
             </div>
           ) : 'Analyze Building in Public Score'}
         </button>
-      </form>
+      </motion.form>
       
-      {/* How It Works section with darker text */}
-      <div className="w-full max-w-3xl">
-        <h2 className="text-2xl font-bold text-center mb-8 text-gray-800">How It Works</h2>
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.4 }}
+        className="w-full max-w-3xl"
+      >
+        <h2 className="text-2xl font-bold text-center mb-8 bg-gradient-to-r from-blue-700 to-indigo-700 bg-clip-text text-transparent">How It Works</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div className="bg-white p-6 rounded-lg shadow-md transition-transform duration-300 hover:transform hover:scale-105">
-            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-xl mb-4 mx-auto">1</div>
+          <div className="bg-white p-6 rounded-xl shadow-md transition-all duration-300 hover:shadow-xl hover:transform hover:scale-105 border border-gray-100">
+            <div className="w-12 h-12 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-xl mb-4 mx-auto shadow-md">1</div>
             <h3 className="text-lg font-semibold text-center mb-2 text-gray-800">Enter Your Username</h3>
             <p className="text-gray-800 text-center">Provide your X username and activity metrics</p>
           </div>
           
-          <div className="bg-white p-6 rounded-lg shadow-md transition-transform duration-300 hover:transform hover:scale-105">
-            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-xl mb-4 mx-auto">2</div>
+          <div className="bg-white p-6 rounded-xl shadow-md transition-all duration-300 hover:shadow-xl hover:transform hover:scale-105 border border-gray-100">
+            <div className="w-12 h-12 bg-gradient-to-br from-indigo-400 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold text-xl mb-4 mx-auto shadow-md">2</div>
             <h3 className="text-lg font-semibold text-center mb-2 text-gray-800">Analysis</h3>
             <p className="text-gray-800 text-center">We analyze your GitHub and Twitter building patterns</p>
           </div>
           
-          <div className="bg-white p-6 rounded-lg shadow-md transition-transform duration-300 hover:transform hover:scale-105">
-            <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-blue-600 font-bold text-xl mb-4 mx-auto">3</div>
+          <div className="bg-white p-6 rounded-xl shadow-md transition-all duration-300 hover:shadow-xl hover:transform hover:scale-105 border border-gray-100">
+            <div className="w-12 h-12 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center text-white font-bold text-xl mb-4 mx-auto shadow-md">3</div>
             <h3 className="text-lg font-semibold text-center mb-2 text-gray-800">Get Your Badge</h3>
             <p className="text-gray-800 text-center">Receive personalized recommendations and your builder score</p>
           </div>
         </div>
-      </div>
+      </motion.div>
       
-      <div className="mt-10 text-center">
+      <div className="mt-12 text-center">
         <p className="text-sm text-gray-800">
           Created by <a href="https://x.com/TanayVasishtha" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">@TanayVasishtha</a>
         </p>
@@ -153,6 +173,7 @@ export default function AnalysisForm({ includeHeader = true }) {
     </div>
   );
 }
+
 
 
 
