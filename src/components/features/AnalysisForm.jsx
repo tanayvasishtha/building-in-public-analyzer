@@ -60,7 +60,7 @@ export default function AnalysisForm({ includeHeader = true }) {
         transition={{ duration: 0.6, delay: 0.2 }}
         className="w-full max-w-md mx-auto bg-white rounded-xl shadow-xl p-6 mb-12 border border-gray-100"
       >
-        <h2 className="text-2xl font-semibold mb-6 text-center bg-gradient-to-r from-blue-700 to-indigo-700 bg-clip-text text-transparent">
+        <h2 className="text-2xl font-semibold mb-6 text-center bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
           Calculate Your Builder Score
         </h2>
         
