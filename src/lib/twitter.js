@@ -1,19 +1,21 @@
 import { TwitterApi } from 'twitter-api-v2';
 
-// Create Twitter API client with proper consumer keys
+// Create Twitter API client with proper keys from environment variables
 export async function createTwitterClient() {
   try {
     console.log("Initializing Twitter client with consumer keys");
     
     // Check if keys exist
-    if (!process.env.API_KEY || !process.env.API_SECRET) {
+    if (!process.env.TWITTER_API_KEY || !process.env.TWITTER_API_SECRET) {
       throw new Error("Twitter API credentials missing");
     }
     
-    // Use consumer keys (API Key and Secret) instead of OAuth 2.0 credentials
+    // Use the exact environment variable names from your .env.local file
     const client = new TwitterApi({
-      appKey: process.env.API_KEY,
-      appSecret: process.env.API_SECRET
+      appKey: process.env.TWITTER_API_KEY,
+      appSecret: process.env.TWITTER_API_SECRET,
+      accessToken: process.env.TWITTER_ACCESS_TOKEN,
+      accessSecret: process.env.TWITTER_ACCESS_SECRET
     });
     
     console.log("Created client, attempting to get app-only client");
@@ -48,7 +50,7 @@ export async function fetchUserProfile(client, username) {
 export async function fetchUserTweets(client, userId) {
   try {
     const tweets = await client.v2.userTimeline(userId, {
-      max_results: 10, // Limited to 10 tweets for API quota reasons
+      max_results: 10,
       'tweet.fields': 'created_at,public_metrics,text',
       exclude: 'retweets,replies'
     });
