@@ -23,27 +23,27 @@ export default function ResultsCard({ analysis = {}, profile = {} }) {
         />
         <div>
           <h2 className="text-lg font-bold">{profile.name || profile.username || 'User'}</h2>
-          <p className="text-gray-600 text-xs">@{profile.username || 'username'}</p>
+          <p className="text-black text-xs">@{profile.username || 'username'}</p>
         </div>
       </div>
       
       <div className="grid grid-cols-2 gap-2 mb-2">
         <div className="bg-blue-50 p-2 rounded-lg border border-blue-100">
-          <div className="text-xs text-gray-600">Twitter Posts</div>
+          <div className="text-xs text-black">Twitter Posts</div>
           <div className="text-lg font-bold text-blue-700">{twitterPosts.toLocaleString()}</div>
         </div>
         
         <div className="bg-indigo-50 p-2 rounded-lg border border-indigo-100">
-          <div className="text-xs text-gray-600">GitHub Contributions</div>
+          <div className="text-xs text-black">GitHub Contributions</div>
           <div className="text-lg font-bold text-indigo-700">{githubContributions.toLocaleString()}</div>
         </div>
       </div>
       
       <div className="mb-2 bg-gradient-to-r from-purple-50 to-pink-50 p-2 rounded-lg border border-purple-100">
-        <div className="text-xs text-gray-600">Building Ratio (Twitter:GitHub)</div>
+        <div className="text-xs text-black">Building Ratio (Twitter:GitHub)</div>
         <div className="flex justify-between items-center">
           <div className="text-lg font-bold text-purple-700">{buildingRatio}</div>
-          <div className="text-xs text-gray-600">{builderType}</div>
+          <div className="text-xs text-black font-medium">{builderType}</div>
         </div>
       </div>
       
@@ -53,7 +53,7 @@ export default function ResultsCard({ analysis = {}, profile = {} }) {
             key={key} 
             className="bg-gray-50 p-1.5 rounded-md border border-gray-100"
           >
-            <div className="text-gray-700 capitalize text-xs font-medium mb-0.5">{key}</div>
+            <div className="text-black capitalize text-xs font-medium mb-0.5">{key}</div>
             <div className="flex items-center">
               <div className="w-full bg-gray-200 rounded-full h-1.5 mr-1 overflow-hidden">
                 <div
@@ -61,7 +61,7 @@ export default function ResultsCard({ analysis = {}, profile = {} }) {
                   style={{ width: `${Math.min(100, Math.round(value || 0))}%` }}
                 />
               </div>
-              <span className="text-xs font-semibold">{Math.min(100, Math.round(value || 0))}</span>
+              <span className="text-xs font-semibold text-black">{Math.min(100, Math.round(value || 0))}</span>
             </div>
           </div>
         ))}
