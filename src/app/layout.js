@@ -12,7 +12,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 bg-fixed`}>
+      <body className={`${inter.className} min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 bg-fixed`}>
         <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] pointer-events-none"></div>
         
         <header className="bg-white/80 backdrop-blur-sm shadow-sm py-4 sticky top-0 z-10 border-b border-gray-100">
@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
         
         <footer className="bg-white/80 backdrop-blur-sm py-6 border-t border-gray-100">
           <div className="container mx-auto px-4 text-center">
-            <p className="text-gray-800">© {new Date().getFullYear()} Building in Public Analyzer</p>
+            <p className="text-gray-800 mb-2">Built with ❤️ by <a href="https://x.com/TanayVasishtha" className="text-blue-600 hover:underline">@TanayVasishtha</a></p>
             <div className="mt-4 flex justify-center items-center space-x-6">
               <a 
                 href="https://github.com/tanayvasishtha/building-in-public-analyzer" 

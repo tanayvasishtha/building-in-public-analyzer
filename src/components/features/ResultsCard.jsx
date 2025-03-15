@@ -15,12 +15,12 @@ export default function ResultsCard({ analysis = {}, profile = {} }) {
       transition={{ duration: 0.5 }}
       className="bg-white rounded-xl shadow-lg p-4 w-full h-full border border-gray-100"
     >
-      <div className="flex items-center mb-3">
-        <div className="relative">
+      <div className="flex items-center mb-4">
+        <div className="relative mr-3">
           <img 
             src={profile.profile_image_url || "https://via.placeholder.com/150"}
             alt={profile.name || profile.username || 'User'} 
-            className="w-12 h-12 rounded-full mr-3 border-2 border-white shadow-md"
+            className="w-12 h-12 rounded-full border-2 border-white shadow-md"
           />
           <div className="absolute -bottom-1 -right-1 h-5 w-5 bg-gradient-to-r from-blue-500 to-indigo-500 rounded-full flex items-center justify-center">
             <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 24 24">
@@ -34,7 +34,7 @@ export default function ResultsCard({ analysis = {}, profile = {} }) {
         </div>
       </div>
       
-      <div className="grid grid-cols-2 gap-2 mb-3">
+      <div className="grid grid-cols-2 gap-3 mb-3">
         <div className="bg-gradient-to-br from-blue-500/10 to-blue-600/10 p-3 rounded-xl border border-blue-100">
           <div className="text-xs font-medium text-blue-800 mb-1">Twitter Posts</div>
           <div className="text-lg font-bold text-blue-700">{twitterPosts.toLocaleString()}</div>
@@ -46,7 +46,7 @@ export default function ResultsCard({ analysis = {}, profile = {} }) {
         </div>
       </div>
       
-      <div className="mb-3 bg-gradient-to-r from-purple-100 to-pink-100 p-3 rounded-xl border border-purple-200">
+      <div className="mb-4 bg-gradient-to-r from-purple-100 to-pink-100 p-3 rounded-xl border border-purple-200">
         <div className="text-xs font-medium text-purple-800 mb-1">Building Ratio (Twitter:GitHub)</div>
         <div className="flex justify-between items-center">
           <div className="text-lg font-bold text-purple-700">{buildingRatio}</div>
@@ -56,7 +56,7 @@ export default function ResultsCard({ analysis = {}, profile = {} }) {
         </div>
       </div>
       
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-3">
+      <div className="grid grid-cols-3 gap-3">
         {Object.entries(scores).map(([key, value], index) => (
           <motion.div 
             key={key} 
@@ -66,11 +66,11 @@ export default function ResultsCard({ analysis = {}, profile = {} }) {
             className="bg-gray-50 p-2.5 rounded-lg border border-gray-100 hover:border-blue-200 hover:shadow-sm transition-all duration-200"
           >
             <div className="text-black capitalize text-xs font-medium mb-1.5 flex items-center">
-              <svg className="w-3 h-3 text-blue-500 mr-1" fill="currentColor" viewBox="0 0 20 20">
+              <svg className="w-3 h-3 text-blue-500 mr-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M2 10a8 8 0 018-8v8h8a8 8 0 11-16 0z"></path>
                 <path d="M12 2.252A8.014 8.014 0 0117.748 8H12V2.252z"></path>
               </svg>
-              {key}
+              <span className="truncate">{key}</span>
             </div>
             <div className="flex items-center">
               <div className="w-full bg-gray-200 rounded-full h-2 mr-2 overflow-hidden">
@@ -79,7 +79,7 @@ export default function ResultsCard({ analysis = {}, profile = {} }) {
                   style={{ width: `${Math.min(100, Math.round(value || 0))}%` }}
                 />
               </div>
-              <span className="text-xs font-semibold text-black">{Math.min(100, Math.round(value || 0))}</span>
+              <span className="text-xs font-semibold text-black flex-shrink-0">{Math.min(100, Math.round(value || 0))}</span>
             </div>
           </motion.div>
         ))}
@@ -87,6 +87,7 @@ export default function ResultsCard({ analysis = {}, profile = {} }) {
     </motion.div>
   );
 }
+
 
 
 

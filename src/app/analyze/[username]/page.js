@@ -69,13 +69,13 @@ export default function AnalysisPage() {
   const recommendations = data?.recommendations || [];
   
   return (
-    <div className="min-h-screen flex flex-col items-center py-6 px-4">
+    <div className="min-h-screen flex flex-col items-center py-8 px-4">
       <div className="w-full max-w-3xl">
         <motion.div 
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="flex justify-between items-center mb-6"
+          className="flex flex-wrap justify-between items-center mb-6 gap-3"
         >
           <h1 className="text-2xl md:text-3xl font-bold text-black">
             @{username}&apos;s Analysis
@@ -83,17 +83,17 @@ export default function AnalysisPage() {
           <ShareButton username={username} />
         </motion.div>
         
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="md:col-span-1"
           >
-            <div className="w-full bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl p-4 flex flex-col items-center justify-center text-center shadow-lg">
+            <div className="w-full bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl p-5 flex flex-col items-center justify-center text-center shadow-lg">
               <div className="text-white font-bold text-lg mb-1">Building in Public</div>
-              <div className="text-2xl font-bold mb-2 text-white">{categoryInfo.name}</div>
-              <div className="relative mb-2">
+              <div className="text-2xl font-bold mb-3 text-white">{categoryInfo.name}</div>
+              <div className="relative mb-3">
                 <div className="w-24 h-24 rounded-full bg-white/20 flex items-center justify-center mb-2">
                   <div className="text-6xl font-bold text-white">{Math.min(100, Math.round(analysis.overallScore || 0))}</div>
                 </div>
@@ -103,8 +103,8 @@ export default function AnalysisPage() {
                   </svg>
                 </div>
               </div>
-              <div className="text-sm mb-2 text-white/90">Builder Score</div>
-              <p className="text-sm text-white/90 bg-white/10 p-2 rounded-lg">{categoryInfo.description}</p>
+              <div className="text-sm mb-3 text-white/90">Builder Score</div>
+              <p className="text-sm text-white/90 bg-white/10 p-3 rounded-lg">{categoryInfo.description}</p>
             </div>
           </motion.div>
           
@@ -165,6 +165,7 @@ export default function AnalysisPage() {
     </div>
   );
 }
+
 
 
 
