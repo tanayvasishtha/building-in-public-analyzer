@@ -47,9 +47,13 @@ async function getProfilePicture(username) {
   }
 }
 
-// Calculate building score based on manual inputs
+// Calculate building score based on manual inputs - FIXED to cap at 100
 function calculateScore(twitterPosts, githubContributions) {
-  return Math.round((twitterPosts * 0.4) + (githubContributions * 0.6));
+  // Raw score
+  const rawScore = (twitterPosts * 0.4) + (githubContributions * 0.6);
+  
+  // Normalize to 0-100 scale with a logarithmic curve
+  return Math.min(100, Math.round(20 * Math.log10(rawScore + 1)));
 }
 
 // Calculate ratio for categorization
@@ -60,11 +64,11 @@ function calculateRatio(twitterPosts, githubContributions) {
 
 // Determine builder category based on score
 function determineCategory(score) {
-  if (score >= 2000) return 'BIP_CONQUEROR';
-  if (score >= 1000) return 'INFLUENTIAL_BUILDER';
-  if (score >= 500) return 'ENGAGED_BUILDER';
-  if (score >= 200) return 'CONSISTENT_BUILDER';
-  if (score >= 50) return 'EMERGING_BUILDER';
+  if (score >= 85) return 'BIP_CONQUEROR';
+  if (score >= 70) return 'INFLUENTIAL_BUILDER';
+  if (score >= 55) return 'ENGAGED_BUILDER';
+  if (score >= 40) return 'CONSISTENT_BUILDER';
+  if (score >= 25) return 'EMERGING_BUILDER';
   return 'STEALTH_BUILDER';
 }
 
@@ -155,7 +159,7 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Username is required' }, { status: 400 });
     }
     
-    // Calculate building score
+    // Calculate building score (now normalized to 0-100)
     const overallScore = calculateScore(twitterPosts, githubContributions);
     
     // Calculate ratio for builder type
@@ -165,7 +169,7 @@ export async function POST(request) {
     // Determine builder category
     const category = determineCategory(overallScore);
     
-    // Generate sub-scores for display
+    // Generate sub-scores for display (scaled appropriately)
     const scores = {
       twitter: Math.min(100, (twitterPosts / 1000) * 100),
       github: Math.min(100, (githubContributions / 1000) * 100),
@@ -205,7 +209,6 @@ export async function POST(request) {
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
-
 
 
 
