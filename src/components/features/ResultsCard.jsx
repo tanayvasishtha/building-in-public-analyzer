@@ -22,7 +22,7 @@ export default function ResultsCard({ analysis = {}, profile = {} }) {
           className="w-10 h-10 rounded-full mr-2 border-2 border-gray-200"
         />
         <div>
-          <h2 className="text-lg font-bold">{profile.name || profile.username || 'User'}</h2>
+          <h2 className="text-lg font-bold text-black">{profile.name || profile.username || 'User'}</h2>
           <p className="text-black text-xs">@{profile.username || 'username'}</p>
         </div>
       </div>
