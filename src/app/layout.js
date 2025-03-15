@@ -12,7 +12,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 bg-fixed`}>
+      <body className={`${inter.className} min-h-screen bg-gradient-to-br from-blue-100 via-indigo-50 to-purple-200 bg-fixed`}>
         <div className="absolute inset-0 bg-grid-pattern opacity-[0.03] pointer-events-none"></div>
         
         <header className="bg-white/80 backdrop-blur-sm shadow-sm py-4 sticky top-0 z-10 border-b border-gray-100">
