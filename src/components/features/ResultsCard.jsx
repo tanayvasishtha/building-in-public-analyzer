@@ -2,11 +2,9 @@
 import { motion } from 'framer-motion';
 
 export default function ResultsCard({ analysis = {}, profile = {} }) {
-  // Ensure all required objects and properties exist
   const scores = analysis?.scores || {};
   const buildingRatio = analysis?.buildingRatio || '0.00';
   const builderType = analysis?.builderType || 'Builder';
-  const overallScore = analysis?.overallScore || 0;
   const twitterPosts = analysis?.twitterPosts || 0;
   const githubContributions = analysis?.githubContributions || 0;
   
@@ -15,55 +13,49 @@ export default function ResultsCard({ analysis = {}, profile = {} }) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="bg-white rounded-lg shadow-lg p-4 w-full h-full"
+      className="bg-white rounded-lg shadow-lg p-3 w-full h-full"
     >
-      <div className="flex items-center mb-3">
+      <div className="flex items-center mb-2">
         <img 
           src={profile.profile_image_url || "https://via.placeholder.com/150"}
           alt={profile.name || profile.username || 'User'} 
-          className="w-12 h-12 rounded-full mr-3 border-2 border-gray-200"
+          className="w-10 h-10 rounded-full mr-2 border-2 border-gray-200"
         />
         <div>
-          <h2 className="text-xl font-bold">{profile.name || profile.username || 'User'}</h2>
-          <p className="text-gray-600 text-sm">@{profile.username || 'username'}</p>
+          <h2 className="text-lg font-bold">{profile.name || profile.username || 'User'}</h2>
+          <p className="text-gray-600 text-xs">@{profile.username || 'username'}</p>
         </div>
       </div>
       
-      <h3 className="text-lg font-semibold mb-2">Building in Public Analysis</h3>
-      
-      <div className="grid grid-cols-2 gap-3 mb-3">
-        <div className="bg-blue-50 p-3 rounded-lg border border-blue-100">
-          <div className="text-xs text-gray-600 mb-1">Twitter Posts</div>
-          <div className="text-xl font-bold text-blue-700">{twitterPosts.toLocaleString()}</div>
+      <div className="grid grid-cols-2 gap-2 mb-2">
+        <div className="bg-blue-50 p-2 rounded-lg border border-blue-100">
+          <div className="text-xs text-gray-600">Twitter Posts</div>
+          <div className="text-lg font-bold text-blue-700">{twitterPosts.toLocaleString()}</div>
         </div>
         
-        <div className="bg-indigo-50 p-3 rounded-lg border border-indigo-100">
-          <div className="text-xs text-gray-600 mb-1">GitHub Contributions</div>
-          <div className="text-xl font-bold text-indigo-700">{githubContributions.toLocaleString()}</div>
+        <div className="bg-indigo-50 p-2 rounded-lg border border-indigo-100">
+          <div className="text-xs text-gray-600">GitHub Contributions</div>
+          <div className="text-lg font-bold text-indigo-700">{githubContributions.toLocaleString()}</div>
         </div>
       </div>
       
-      <div className="mb-3 bg-gradient-to-r from-purple-50 to-pink-50 p-3 rounded-lg border border-purple-100">
-        <div className="text-xs text-gray-600 mb-1">Building Ratio (Twitter:GitHub)</div>
-        <div className="text-xl font-bold text-purple-700">{buildingRatio}</div>
-        <div className="text-xs text-gray-600 mt-1">{builderType}</div>
+      <div className="mb-2 bg-gradient-to-r from-purple-50 to-pink-50 p-2 rounded-lg border border-purple-100">
+        <div className="text-xs text-gray-600">Building Ratio (Twitter:GitHub)</div>
+        <div className="flex justify-between items-center">
+          <div className="text-lg font-bold text-purple-700">{buildingRatio}</div>
+          <div className="text-xs text-gray-600">{builderType}</div>
+        </div>
       </div>
       
-      <div className="text-center mb-4 p-3 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-lg">
-        <span className="text-3xl font-bold text-blue-600">{Math.min(100, Math.round(overallScore))}</span>
-        <span className="text-lg ml-1 text-blue-600">/ 100</span>
-        <p className="text-xs text-gray-600 mt-1">Overall Building Score</p>
-      </div>
-      
-      <div className="grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
         {Object.entries(scores).map(([key, value], index) => (
           <div 
             key={key} 
-            className="bg-gray-50 p-2 rounded-md border border-gray-100"
+            className="bg-gray-50 p-1.5 rounded-md border border-gray-100"
           >
-            <div className="text-gray-700 capitalize text-xs font-medium mb-1">{key}</div>
+            <div className="text-gray-700 capitalize text-xs font-medium mb-0.5">{key}</div>
             <div className="flex items-center">
-              <div className="w-full bg-gray-200 rounded-full h-2 mr-2 overflow-hidden">
+              <div className="w-full bg-gray-200 rounded-full h-1.5 mr-1 overflow-hidden">
                 <div
                   className="bg-blue-600 h-full rounded-full"
                   style={{ width: `${Math.min(100, Math.round(value || 0))}%` }}

@@ -14,10 +14,8 @@ export default function AnalysisPage() {
   useEffect(() => {
     async function fetchAnalysis() {
       try {
-        // Get stored form data
         const storedData = JSON.parse(localStorage.getItem('bipAnalyzerData')) || {};
         
-        // Make API request with the stored data
         const response = await fetch('/api/analyze', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -53,16 +51,15 @@ export default function AnalysisPage() {
   
   if (error || !data) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center p-8">
-        <div className="bg-red-100 text-red-700 p-4 rounded-lg max-w-md text-center">
-          <h2 className="text-xl font-bold mb-2">Error</h2>
+      <div className="min-h-screen flex flex-col items-center justify-center p-4">
+        <div className="bg-red-100 text-red-700 p-3 rounded-lg max-w-md text-center">
+          <h2 className="text-lg font-bold mb-1">Error</h2>
           <p>Failed to analyze profile for @{username}. Please try again.</p>
         </div>
       </div>
     );
   }
   
-  // Ensure all required objects and properties exist
   const profile = data?.profile || {};
   const analysis = data?.analysis || {};
   const categoryInfo = analysis?.categoryInfo || { 
@@ -72,57 +69,51 @@ export default function AnalysisPage() {
   const recommendations = data?.recommendations || [];
   
   return (
-    <div className="min-h-screen flex flex-col items-center py-6 px-4 bg-gradient-to-b from-white to-blue-50">
+    <div className="min-h-screen flex flex-col items-center py-3 px-3 bg-gradient-to-b from-white to-blue-50">
       <div className="w-full max-w-3xl">
-        <h1 className="text-2xl md:text-3xl font-bold text-center mb-2 text-gray-800">
-          @{username}&apos;s Building in Public Analysis
-        </h1>
-        <p className="text-center text-gray-600 mb-4 text-sm">
-          Analyzed on {new Date().toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          })}
-        </p>
+        <div className="flex justify-between items-center mb-2">
+          <h1 className="text-xl md:text-2xl font-bold text-gray-800">
+            @{username}&apos;s Analysis
+          </h1>
+          <ShareButton username={username} />
+        </div>
         
-        {/* Improved responsive layout with tighter spacing */}
-        <div className="flex flex-col lg:flex-row gap-4 mb-6">
-          <div className="lg:w-1/3 w-full flex justify-center">
-            <div className="relative w-full max-w-xs mx-auto lg:w-full h-auto aspect-square bg-gradient-to-br from-blue-400 to-blue-600 border-2 border-blue-500 rounded-lg p-4 flex flex-col items-center justify-center text-center shadow-lg">
-              <div className="text-white font-bold text-lg mb-1">Building in Public</div>
-              <div className="text-2xl font-bold mb-2 text-white">{categoryInfo.name}</div>
-              <div className="text-6xl font-bold mb-1 text-white">{Math.min(100, Math.round(analysis.overallScore || 0))}</div>
-              <div className="text-sm mb-2 text-white opacity-90">Builder Score</div>
-              <p className="text-sm text-white opacity-90">{categoryInfo.description}</p>
-              <div className="absolute bottom-3 text-xs text-white opacity-75">@{username}</div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+          <div className="md:col-span-1">
+            <div className="w-full bg-gradient-to-br from-blue-400 to-blue-600 border-2 border-blue-500 rounded-lg p-3 flex flex-col items-center justify-center text-center shadow-lg">
+              <div className="text-white font-bold text-base mb-0.5">Building in Public</div>
+              <div className="text-xl font-bold mb-1 text-white">{categoryInfo.name}</div>
+              <div className="text-5xl font-bold mb-0.5 text-white">{Math.min(100, Math.round(analysis.overallScore || 0))}</div>
+              <div className="text-xs mb-1 text-white opacity-90">Builder Score</div>
+              <p className="text-xs text-white opacity-90">{categoryInfo.description}</p>
+            </div>
+            
+            <div className="mt-3 p-3 bg-white rounded-lg shadow">
+              <h3 className="font-semibold text-gray-800 mb-2">Build Recommendations</h3>
+              <ul className="space-y-1.5">
+                {recommendations.slice(0, 3).map((rec, index) => (
+                  <li key={index} className="text-xs text-gray-700 flex">
+                    <svg className="w-4 h-4 mr-1 text-blue-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"></path>
+                    </svg>
+                    {rec}
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
           
-          <div className="lg:w-2/3 w-full">
+          <div className="md:col-span-2">
             <ResultsCard analysis={analysis} profile={profile} />
           </div>
         </div>
         
-        <div className="mb-6">
-          <Recommendations recommendations={recommendations} />
-        </div>
-        
-        <div className="flex justify-center mb-6">
-          <ShareButton username={username} />
-        </div>
-        
-        {/* GitHub star request */}
-        <div className="mt-4 text-center">
-          <p className="text-sm text-gray-600">
-            If you found this analysis useful, please 
-            <a 
-              href="https://github.com/tanayvasishtha/building-in-public-analyzer" 
-              target="_blank" 
-              rel="noopener noreferrer" 
-              className="text-blue-600 hover:underline ml-1"
-            >
-              star our GitHub repository
-            </a>
+        <div className="text-center mt-3">
+          <p className="text-xs text-gray-600">
+            If you found this useful, please 
+            <a href="https://github.com/tanayvasishtha/building-in-public-analyzer" 
+               target="_blank" rel="noopener noreferrer" 
+               className="text-blue-600 hover:underline ml-1">star our GitHub repository</a>
           </p>
         </div>
       </div>
