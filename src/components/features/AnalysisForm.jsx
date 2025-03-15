@@ -36,7 +36,7 @@ export default function AnalysisForm({ includeHeader = true }) {
   };
   
   return (
-    <div className="flex flex-col items-center py-10 px-4">
+    <div className="flex flex-col items-center px-4">
       {includeHeader && (
         <motion.div 
           initial={{ opacity: 0, y: -20 }}
