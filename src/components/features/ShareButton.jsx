@@ -4,33 +4,20 @@ import { useState } from 'react';
 export default function ShareButton({ username }) {
   const [shared, setShared] = useState(false);
   
-  const shareUrl = typeof window !== 'undefined' 
-    ? `${window.location.origin}/analyze/${username}`
-    : '';
-    
-  const shareText = `I just analyzed my Building in Public score! Check out my results:`;
-  
   const handleShare = () => {
-    if (navigator.share) {
-      navigator.share({
-        title: 'My Building in Public Score',
-        text: shareText,
-        url: shareUrl,
-      }).then(() => {
-        setShared(true);
-      }).catch(err => {
-        console.error('Error sharing:', err);
-      });
-    } else {
-      try {
-        window.open(
-          `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`,
-          '_blank'
-        );
-        setShared(true);
-      } catch (err) {
-        console.error('Error opening share window:', err);
-      }
+    try {
+      // Create the share text and URL
+      const shareText = `I just analyzed my Building in Public score! Check out my results:`;
+      const shareUrl = `${window.location.origin}/analyze/${username}`;
+      
+      // Create Twitter/X share URL
+      const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}&url=${encodeURIComponent(shareUrl)}`;
+      
+      // Open in a new window
+      window.open(twitterUrl, '_blank');
+      setShared(true);
+    } catch (error) {
+      console.error('Error sharing:', error);
     }
   };
   

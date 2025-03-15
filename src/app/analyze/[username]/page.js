@@ -72,12 +72,12 @@ export default function AnalysisPage() {
   const recommendations = data?.recommendations || [];
   
   return (
-    <div className="min-h-screen flex flex-col items-center py-8 px-4 md:py-12 bg-gradient-to-b from-white to-blue-50">
-      <div className="w-full max-w-4xl">
-        <h1 className="text-2xl md:text-3xl font-bold text-center mb-2 md:mb-3 text-gray-800">
+    <div className="min-h-screen flex flex-col items-center py-6 px-4 bg-gradient-to-b from-white to-blue-50">
+      <div className="w-full max-w-3xl">
+        <h1 className="text-2xl md:text-3xl font-bold text-center mb-2 text-gray-800">
           @{username}&apos;s Building in Public Analysis
         </h1>
-        <p className="text-center text-gray-600 mb-6 md:mb-8 text-sm md:text-base">
+        <p className="text-center text-gray-600 mb-4 text-sm">
           Analyzed on {new Date().toLocaleDateString('en-US', {
             year: 'numeric',
             month: 'long',
@@ -85,16 +85,16 @@ export default function AnalysisPage() {
           })}
         </p>
         
-        {/* Improved responsive layout */}
-        <div className="flex flex-col lg:flex-row gap-6 mb-8">
+        {/* Improved responsive layout with tighter spacing */}
+        <div className="flex flex-col lg:flex-row gap-4 mb-6">
           <div className="lg:w-1/3 w-full flex justify-center">
-            <div className="relative w-full max-w-xs mx-auto lg:w-72 h-auto aspect-[3/4] bg-gradient-to-br from-blue-400 to-blue-600 border-2 border-blue-500 rounded-lg p-4 sm:p-6 flex flex-col items-center justify-center text-center shadow-lg">
-              <div className="text-white font-bold text-lg sm:text-xl mb-2">Building in Public</div>
-              <div className="text-2xl sm:text-3xl font-bold mb-3 sm:mb-4 text-white">{categoryInfo.name}</div>
-              <div className="text-4xl sm:text-6xl font-bold mb-1 sm:mb-2 text-white">{Math.min(100, Math.round(analysis.overallScore || 0))}</div>
-              <div className="text-sm mb-2 md:mb-4 text-white opacity-90">Builder Score</div>
+            <div className="relative w-full max-w-xs mx-auto lg:w-full h-auto aspect-square bg-gradient-to-br from-blue-400 to-blue-600 border-2 border-blue-500 rounded-lg p-4 flex flex-col items-center justify-center text-center shadow-lg">
+              <div className="text-white font-bold text-lg mb-1">Building in Public</div>
+              <div className="text-2xl font-bold mb-2 text-white">{categoryInfo.name}</div>
+              <div className="text-6xl font-bold mb-1 text-white">{Math.min(100, Math.round(analysis.overallScore || 0))}</div>
+              <div className="text-sm mb-2 text-white opacity-90">Builder Score</div>
               <p className="text-sm text-white opacity-90">{categoryInfo.description}</p>
-              <div className="absolute bottom-4 text-xs text-white opacity-75">@{username}</div>
+              <div className="absolute bottom-3 text-xs text-white opacity-75">@{username}</div>
             </div>
           </div>
           
@@ -103,17 +103,18 @@ export default function AnalysisPage() {
           </div>
         </div>
         
-        <div className="mb-8">
+        <div className="mb-6">
           <Recommendations recommendations={recommendations} />
         </div>
         
-        <div className="flex justify-center">
+        <div className="flex justify-center mb-6">
           <ShareButton username={username} />
         </div>
       </div>
     </div>
   );
 }
+
 
 
 
