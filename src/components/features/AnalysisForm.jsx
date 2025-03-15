@@ -19,36 +19,17 @@ export default function AnalysisForm() {
     setError('');
     
     try {
-      console.log('Sending request to:', '/api/analyze');
+      // Store the input values in localStorage before navigation
+      localStorage.setItem('bipAnalyzerData', JSON.stringify({
+        username,
+        twitterPosts: parseInt(twitterPosts) || 0,
+        githubContributions: parseInt(githubContributions) || 0
+      }));
       
-      const response = await fetch('/api/analyze', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ 
-          username,
-          twitterPosts: parseInt(twitterPosts) || 0,
-          githubContributions: parseInt(githubContributions) || 0 
-        })
-      });
-      
-      // Get raw text first instead of directly parsing JSON
-      const responseText = await response.text();
-      console.log('Raw API response:', responseText);
-      
-      // Now try to parse it
-      try {
-        const data = JSON.parse(responseText);
-        // If we get here, JSON parsing worked
-        console.log('Parsed data:', data);
-        router.push(`/analyze/${username}`);
-      } catch (parseError) {
-        console.error('JSON parse error:', parseError);
-        setError(`API returned invalid JSON: ${responseText.substring(0, 100)}...`);
-      }
+      // Navigate to analysis page
+      router.push(`/analyze/${username}`);
     } catch (error) {
-      console.error('Fetch error:', error);
+      console.error('Error:', error);
       setError(error.message);
     } finally {
       setIsLoading(false);
@@ -133,7 +114,6 @@ export default function AnalysisForm() {
     </form>
   );
 }
-
 
 
 

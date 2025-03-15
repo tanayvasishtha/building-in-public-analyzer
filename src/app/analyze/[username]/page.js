@@ -1,49 +1,57 @@
+'use client';
+import { useEffect, useState } from 'react';
+import { useParams } from 'next/navigation';
 import ResultsCard from '@/components/features/ResultsCard';
 import Recommendations from '@/components/features/Recommendations';
 import ShareButton from '@/components/features/ShareButton';
 
-export async function generateMetadata({ params }) {
-  const { username } = await params;
-  return {
-    title: `${username}&apos;s Building in Public Analysis`,
-    description: `Check out ${username}&apos;s Building in Public analysis and score.`
-  };
-}
-
-async function getAnalysisData(username) {
-  try {
-    // Fetch analysis data from session storage in client-side
-    const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3002'}/api/analyze`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ 
-        username,
-        // Note: These values will be replaced by the actual form input when submitted
-        twitterPosts: 500,
-        githubContributions: 700
-      }),
-      cache: 'no-store'
-    });
-    
-    if (!response.ok) {
-      throw new Error('Failed to fetch analysis');
+export default function AnalysisPage() {
+  const { username } = useParams();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [data, setData] = useState(null);
+  
+  useEffect(() => {
+    async function fetchAnalysis() {
+      try {
+        // Get stored form data
+        const storedData = JSON.parse(localStorage.getItem('bipAnalyzerData')) || {};
+        
+        // Make API request with the stored data
+        const response = await fetch('/api/analyze', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            username,
+            twitterPosts: storedData.twitterPosts || 0,
+            githubContributions: storedData.githubContributions || 0
+          })
+        });
+        
+        if (!response.ok) throw new Error('Analysis failed');
+        
+        const result = await response.json();
+        setData(result);
+      } catch (err) {
+        console.error('Error:', err);
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
     }
     
-    return await response.json();
-  } catch (error) {
-    console.error('Error getting analysis:', error);
-    // Return null to handle error in component
-    return null;
-  }
-}
-
-export default async function AnalysisPage({ params }) {
-  const { username } = await params;
-  const data = await getAnalysisData(username);
+    fetchAnalysis();
+  }, [username]);
   
-  if (!data) {
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
+  
+  if (error || !data) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center p-8">
         <div className="bg-red-100 text-red-700 p-4 rounded-lg max-w-md text-center">
