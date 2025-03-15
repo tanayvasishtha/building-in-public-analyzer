@@ -113,7 +113,7 @@ export default function AnalysisForm() {
         </button>
       </form>
       
-      {/* ONLY ONE How It Works section at the bottom */}
+      {/* ONLY ONE How It Works section with hover animations */}
       <div className="w-full max-w-3xl">
         <h2 className="text-2xl font-bold text-center mb-8">How It Works</h2>
         
@@ -149,8 +149,6 @@ export default function AnalysisForm() {
     </div>
   );
 }
-
-
 
 
 
